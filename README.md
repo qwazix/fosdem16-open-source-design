@@ -1,9 +1,9 @@
 ## FOSDEM 15 Open Source DevRoom Presentation Slides
 
-#The challenges of open mobile design
-##vision vs design by commitee & productivity vs content consumption
+#Open source in non software design
+##Architectural, structural and other design domains could go open source
 
-https://fosdem.org/2015/schedule/event/session_7/
+https://fosdem.org/2016/schedule/event/osd_open_source_in_non_software_design/
 
 This presentation is shared under CC BY-SA 4.0 which means that you can: 
 
@@ -12,6 +12,4 @@ Adapt — remix, transform, and build upon the material
 for any purpose, even commercially.
 
 The accompanying code (except the libraries and where otherwise stated) is shared under the GPLv3
-
-Unfortunately I have used some non-free fonts in this presentation. The compiled version has them converted to paths so that you can legally see it as intended.
 
