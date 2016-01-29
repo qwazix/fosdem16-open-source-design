@@ -93,6 +93,8 @@
         <div id="notesoverlay"><div></div></div>
         <script>
             var currentSlide = 1;
+            var working = false;
+            var official = false;
 
             function newWinText(notes) {
                 return '<!doctype html><html><style>flowpara{display: block;min-height:15px}body{font-family:helvetica;font-size:18px;line-height:1.35em;}</style><body>' + notes + '</body></html>'
@@ -126,7 +128,8 @@
                     }
                 }
 
-                //removethis
+                //if there's an element with id video in this slide, show the actual html video
+                //this is a workaround until it's possible to add videos to the svg in inkscape
                 if ($(currentSlideSelector).find("#video").length) {
                     $("video").show();
                 } else {
@@ -135,9 +138,38 @@
                 $(currentSlideSelector).find("[data-surrogate-of]").each(function () {
                     $(this).replaceWith("<foreignObject>" + $(this).attr("data-surrogate-of") + "</foreignObject>");
                 });
+                
+                //notify server about the current slide
+                if (official){
+                  var currentSlideId = $(currentSlideSelector).attr('id');
+                    $.ajax("http://play.qwazix.com/fosdem16/state.php?state="+currentSlideId+"&secret=37709");
+                }
             }
 
             $(document).ready(function () {
+              $.ajax("official").done(function(data){
+                if (data=="true") {
+                  official = true;
+                  working = true;
+                } else if (data=="preview"){
+                  working = true;
+                } else {
+                  $.ajax("state").done(function(data) { 
+                    if ($.trim(data)=="_allclear_") working = true; 
+                    else{
+                      //get state from server at intervals so that the presentation changes when I change the slide remotely
+                       setInterval(function(){
+                         $.ajax("state").done(function(data) { 
+                           if (data!="_allclear_") window.location.hash = data;
+                           else working = true;
+                         })
+                         
+                       },1000)
+                    }
+                  })
+                }
+              });
+              
                 $('#osvg').load('fosdem%20presentation.svg', function () {
                     //$('g').css('display','')
                     $('#osvg svg>g').hide()
@@ -151,38 +183,42 @@
                 })
                 window.onhashchange = hashTriggered
                 $(window).keydown(function (e) {
-                    if ((e.keyCode == 13 || e.keyCode == 39) && $('#osvg svg>g[zinx=currentSlide]').prev("g").length) {
-                        window.location.hash = ($('#osvg svg>g[zinx=currentSlide]').prev("g").attr("id"));
-                        //history.pushState(null, $('#osvg svg>g[zinx=currentSlide]').attr("inkscape:label"), $('#osvg svg>g[zinx=currentSlide]').removeAttr("zinx").hide().prev("g").attr("zinx","currentSlide").show().attr("id"));
-                    } else if (e.keyCode == 37 && $('#osvg svg>g[zinx=currentSlide]').next("g").length) { //|| e.keyCode == 8
-                        window.location.hash = ($('#osvg svg>g[zinx=currentSlide]').next("g").attr("id"));
-                        //$('#osvg svg>g[zinx=currentSlide]').removeAttr("zinx").hide().next("g").attr("zinx","currentSlide").show();
-                    } else if (e.keyCode == 78) {
-                        if (typeof newwin != "object") {
-                            //open a window to display notes
-                            newwin = window.open("about:blank", "zinx_notes", "width=500,height=500,location=no");
-                            //todo named page
-                            //todo no url in popup
-                            if ($('#osvg svg>g[zinx=currentSlide] .notes').length)
-                                notes = $('#osvg svg>g[zinx=currentSlide] .notes').html()
-                            else
-                                notes = ""
+                  if (working){ //nothing works if state is not free
+                      if ((e.keyCode == 13 || e.keyCode == 39) && $('#osvg svg>g[zinx=currentSlide]').prev("g").length) {
+                          window.location.hash = ($('#osvg svg>g[zinx=currentSlide]').prev("g").attr("id"));
+                          //history.pushState(null, $('#osvg svg>g[zinx=currentSlide]').attr("inkscape:label"), $('#osvg svg>g[zinx=currentSlide]').removeAttr("zinx").hide().prev("g").attr("zinx","currentSlide").show().attr("id"));
+                      } else if (e.keyCode == 37 && $('#osvg svg>g[zinx=currentSlide]').next("g").length) { //|| e.keyCode == 8
+                          window.location.hash = ($('#osvg svg>g[zinx=currentSlide]').next("g").attr("id"));
+                          //$('#osvg svg>g[zinx=currentSlide]').removeAttr("zinx").hide().next("g").attr("zinx","currentSlide").show();
+                      } else if (e.keyCode == 78) {
+                          if (typeof newwin != "object") {
+                              //open a window to display notes
+                              newwin = window.open("about:blank", "zinx_notes", "width=500,height=500,location=no");
+                              //todo named page
+                              //todo no url in popup
+                              if ($('#osvg svg>g[zinx=currentSlide] .notes').length)
+                                  notes = $('#osvg svg>g[zinx=currentSlide] .notes').html()
+                              else
+                                  notes = ""
 
-                            newwin.document.write(newWinText(notes));
-                        } else {
-                            newwin.close();
-                            delete newwin;
-                        }
+                              newwin.document.write(newWinText(notes));
+                          } else {
+                              newwin.close();
+                              delete newwin;
+                          }
 
+                      }
                     }
                 })
                 //Fullscreen on F key press
                 $('html').keydown(function (e) {
                     if (e.which == 70)
                         document.documentElement.mozRequestFullScreen();
+                    else if (e.which == 68) //d
+                        $.ajax("http://play.qwazix.com/fosdem16/state.php?state=_allclear_&secret=37709");
                 })
                 $("body").click(function () {
-                    if ($('#osvg svg>g[zinx=currentSlide]').prev("g").length) {
+                    if (working && $('#osvg svg>g[zinx=currentSlide]').prev("g").length) {
                         window.location.hash = ($('#osvg svg>g[zinx=currentSlide]').prev("g").attr("id"));
                     }
                 })
