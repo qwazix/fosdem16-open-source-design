@@ -79,7 +79,7 @@
             .crisp{
                 image-rendering: crisp-edges !important; 
                 image-rendering: -moz-crisp-edges !important; 
-                image-rendering: -webkit-crisp-edges !important; 
+                image-rendering: -webkit-optimize-contrast !important; 
             }
         </style>
     </head>
@@ -147,19 +147,21 @@
             }
 
             $(document).ready(function () {
-              $.ajax("official").done(function(data){
+              $.ajax({url:"official",dataType: "text"}).done(function(data){
+                console.log(data);
                 if (data=="true") {
                   official = true;
                   working = true;
                 } else if (data=="preview"){
                   working = true;
                 } else {
-                  $.ajax("state").done(function(data) { 
+                  $.ajax({url:"state",dataType: "text"}).done(function(data) { 
                     if ($.trim(data)=="_allclear_") working = true; 
                     else{
                       //get state from server at intervals so that the presentation changes when I change the slide remotely
                        setInterval(function(){
-                         $.ajax("state").done(function(data) { 
+                         $.ajax({url:"state?"+parseInt(Math.random()*10000)
+,dataType: "text"}).done(function(data) { 
                            if (data!="_allclear_") window.location.hash = data;
                            else working = true;
                          })
