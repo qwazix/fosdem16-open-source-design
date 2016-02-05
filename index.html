@@ -142,7 +142,7 @@
                 //notify server about the current slide
                 if (official){
                   var currentSlideId = $(currentSlideSelector).attr('id');
-                    $.ajax("http://play.qwazix.com/fosdem16/state.php?state="+currentSlideId+"&secret=37709");
+                    $.ajax("http://example.com/fosdem16/state.php?state="+currentSlideId+"&secret=37709");
                 }
             }
 
@@ -217,7 +217,7 @@
                     if (e.which == 70)
                         document.documentElement.mozRequestFullScreen();
                     else if (e.which == 68) //d
-                        $.ajax("http://play.qwazix.com/fosdem16/state.php?state=_allclear_&secret=37709");
+                        $.ajax("http://example.com/fosdem16/state.php?state=_allclear_&secret=37709");
                 })
                 $("body").click(function () {
                     if (working && $('#osvg svg>g[zinx=currentSlide]').prev("g").length) {

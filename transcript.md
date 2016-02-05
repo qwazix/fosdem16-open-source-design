@@ -1,31 +1,37 @@
-#Hello
+### Hello
 
 Hello to all. On the homepage of opensourcedesign it says "we interpret design at it's broadest sense". Inspired by that phrase, and, due to my involvement in both software and construction domains, I was thinking, what if we could expand the open source mentality to other design industries.
 
 Armed with some informal research about the state of things today, I'm here to share some thoughts on how this could work, why it might fail and what might be required in order to induce change.
 
 
-#Facilitators and Detractors
+### Facilitators and Detractors
 
 There are reasons that would actually make the open source culture easier to thrive on other design domains, and others that make it harder. I'm calling these facilitators and detractors.
 
 Each design domain has it's own facilitators and detractors. I will mostly discuss construction design, and lightly touch product design as these are the areas I have some experience with. There will be time at the end for you to share your own experiences..
 
 
-#History
+### History
 
 1911: Henry Ford and the other car manufacturers agree to cross-license patents. This is one of the first documented attempts to share technology innovation accross an industry
+
 1953: The System A-2 compiler is distributed to UNIVAC customers along with source. It is considered the first free and open-source piece of software, according to wikipedia. However the distribution was not due to activism or even a solid idea why software and knowledge should be public.
+
 1950s: Software is like giving away the wrench and spare tire along with the car, a convenience for the buyer that costs little to the seller.
+
 1970s: As software becomes more complicated, and dedicated software companies pop up, software becomes a product worth protecting.
+
 1983: RMS publishes the GNU manifesto
+
 1991: Linux
+
 1993: Debian
 
 I'm saying all this to underline that software people had caught a glimpse of the good thing and when it started to fade away some of them wanted the freedom back. This time though it''s ideological.
 
 
-#Mythology
+### Mythology
 
 On the other hand, master builders and later architects and civil engineers never had the chance to see how their industry would work if information was shared freely.
 
@@ -40,7 +46,7 @@ The master mason travelled to see the original himself, but upon his return was 
 Despite the fact that it is significantly simpler to reverse-engineer a building, the notion of keeping the source closed was prevalent for centuries.
 
 
-#The Door is Ajar
+### The Door is Ajar
 
 The previous legends highlight the state of mind of construction designers, which is obviously a detractor. I've seen extreme behaviors that underline this reality. A construction executive wanted to upload really low resolution photos on their website, compromising it's advertising effectiveness, in order to protect construction details. An architect did provide their drawings to the engineers of the design team solely in pdf form.
 
@@ -53,7 +59,7 @@ A second facilitator is that, at least for the architectural and structural doma
 The point is that there isn't very much to protect anyway. Compared to the benefits of having vast amounts of information easily accessible it is definitely outweighed. 
 
 
-#No copies please!
+### No copies please!
 
 Buildings usually can't be copied verbatim. 
 
@@ -64,19 +70,19 @@ Contrast this with software, where millions of people might use the exact same v
 Construction design work is always contracted. When it is time to decide if you are going to open source it, you have already been paid for it, and it's highly unlikely that you are going to profit by it anymore. Thus the actual cost and the cost of opportunity both approach zero.
 
 
-#API's
+### API's
 
 Another facilitator is the eagerness of component manufacturers to provide with CAD drawings of their components in the same way that software component vendors provide examples and API references.
 
 
-#Product
+### Product
 
 Product design is harder, as it involves trademarks. On one hand trademarks might be a way to prevent creating an identical product, but on the other, the design is an indivisible part of the product identity, and some times, such as the Coca-Cola bottle it is trademarked by itself.
 
 Firefox might be a good example case. It is free software, however the trademarks prevent a forked project to damage it's reputation. It is possible that product designs could be approached in a similar way.
 
 
-#Bye!
+### Bye!
 
 My conclusion is that introducing an open source workflow in construction design processes is not too hard from a technical point of view. The most significant detractors stem from history and human mentality. In product design reality is a little bit harder.
 
@@ -94,7 +100,7 @@ Keep in mind that I am not a lawyer nor an expert in licenses. This talk aims to
 
 Thank you very much, and let's continue the discussion online.
 
-#Credits
+### Credits
 
 Thank you all very much, and also a big thanks to contributors of artwork for this presentation.
 
